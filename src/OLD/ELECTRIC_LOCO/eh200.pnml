@@ -1,0 +1,61 @@
+spriteset(spriteset_eh200_f, "gfx/ELECTRIC_LOCO/eh200_f.png") {
+	template_fai_4(0, 0)
+}
+spriteset(spriteset_eh200_r, "gfx/ELECTRIC_LOCO/eh200_r.png") {
+	template_fai_4(0, 0)
+}
+//Sprite stack
+
+switch(FEAT_TRAINS, SELF, sw_eh200_sprite, position_in_vehid_chain % 2){
+    0:      spriteset_eh200_f;
+    1:      spriteset_eh200_r;
+}
+
+switch(FEAT_TRAINS, SELF, sw_item_eh200_articulated_part, extra_callback_info1) {
+    /* Add three articulated parts, for a total of four */
+    1: return item_eh200;
+    return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+/* Define the actual train */
+item(FEAT_TRAINS, item_eh200) {
+    /* Define properties first, make sure to set all of them */
+    property {
+        name:                         string(STR_NAME_EH_200);
+        // not available in toyland:
+        climates_available:           ALL_CLIMATES; 
+        introduction_date:            date(2001, 1, 1);
+        model_life:                   VEHICLE_NEVER_EXPIRES;
+        vehicle_life:                 38;
+        reliability_decay:            20;
+        cost_factor:                  45;
+        running_cost_factor:          100;
+        sprite_id:                    SPRITE_ID_NEW_TRAIN;
+        speed:                        68 mph;
+        refit_cost:                   0;
+        // callback flags are not set manually
+        track_type:                   ELRL;
+        ai_special_flag:              AI_FLAG_CARGO;
+        power:                        5120 hp;
+        running_cost_base:            RUNNING_COST_ELECTRIC;
+        weight:                       134 ton;
+        ai_engine_rank:               0;
+        engine_class:                 ENGINE_CLASS_ELECTRIC;
+        extra_power_per_wagon:        0 kW;
+        tractive_effort_coefficient:  0.5; // changed by callback
+        air_drag_coefficient:         0.06;
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_ELECTRIC ;
+        extra_weight_per_wagon:       0 ton;
+        bitmask_vehicle_info:         0;
+		dual_headed                    : 0 ;
+		length:							4;
+    }
+    /* Define graphics and callbacks
+     * Setting all callbacks is not needed, only define what is used */
+    graphics {
+        default				:	sw_eh200_sprite;
+		sound_effect		:	sw_sfx_electric_fai ;
+		create_effect		:	vfx_ohle ;
+		colour_mapping		:	COLOUR_DARK_BLUE;
+        articulated_part	:	sw_item_eh200_articulated_part;
+    }
+}

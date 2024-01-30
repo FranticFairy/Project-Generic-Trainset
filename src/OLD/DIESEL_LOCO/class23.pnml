@@ -1,0 +1,115 @@
+spriteset(spriteset_class23_cc1_brgrn, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 0)}
+spriteset(spriteset_class23_cc1_brylw, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 30)}
+spriteset(spriteset_class23_cc1_brblu, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 60)}
+
+spriteset(spriteset_class23_cc2_brgrn, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 90)}
+spriteset(spriteset_class23_cc2_brylw, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 120)}
+spriteset(spriteset_class23_cc2_brblu, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 150)}
+
+spriteset(spriteset_class23_brgrn, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 0)}
+alternative_sprites(spriteset_class23_brgrn, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_23_32bpp.png"){ template_fai_uk_29_single_l(0,0)}
+spriteset(spriteset_class23_brylw, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 30)}
+alternative_sprites(spriteset_class23_brylw, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_23_32bpp.png"){ template_fai_uk_29_single_l(0,30)}
+spriteset(spriteset_class23_brblu, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 60)}
+alternative_sprites(spriteset_class23_brblu, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_23_32bpp.png"){ template_fai_uk_29_single_l(0,60)}
+
+spriteset(spriteset_class23_lner, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 60)}
+alternative_sprites(spriteset_class23_lner, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_23_32bpp.png"){ template_fai_uk_29_single_l(0,90)}
+spriteset(spriteset_class23_lner_a, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 60)}
+alternative_sprites(spriteset_class23_lner_a, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_23_32bpp.png"){ template_fai_uk_29_single_l(0,120)}
+
+spriteset(spriteset_class23_lms, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 60)}
+alternative_sprites(spriteset_class23_lms, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_23_32bpp.png"){ template_fai_uk_29_single_l(0,150)}
+spriteset(spriteset_class23_lms_a, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 60)}
+alternative_sprites(spriteset_class23_lms_a, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_23_32bpp.png"){ template_fai_uk_29_single_l(0,180)}
+
+spriteset(spriteset_class23_black, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 60)}
+alternative_sprites(spriteset_class23_black, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_23_32bpp.png"){ template_fai_uk_29_single_l(0,210)}
+spriteset(spriteset_class23_black_a, "gfx/DIESEL_LOCO/class_23.png") { template_fai_uk_29_single_l(0, 60)}
+alternative_sprites(spriteset_class23_black_a, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_23_32bpp.png"){ template_fai_uk_29_single_l(0,240)}
+
+switch(FEAT_TRAINS, SELF, sw_class23_yearcheck, current_year){
+	0..1963		: spriteset_class23_brgrn ;
+	1964..1966	: spriteset_class23_brylw ;
+	spriteset_class23_brblu ;
+}
+
+switch(FEAT_TRAINS, SELF, sw_class23_liverycheck, cargo_subtype){
+	1:  spriteset_class23_cc1_brgrn;
+	2:  spriteset_class23_cc2_brgrn;
+	3:  spriteset_class23_cc1_brylw;
+	4:  spriteset_class23_cc2_brylw;
+	5:  spriteset_class23_cc1_brblu;
+	6:  spriteset_class23_cc2_brblu;
+	7:  spriteset_class23_brgrn;
+	8:  spriteset_class23_brylw;
+	9:  spriteset_class23_brblu;
+	return sw_class23_yearcheck;
+}
+
+switch(FEAT_TRAINS, SELF, sw_class23_refit_text, cargo_subtype){
+	0:  string(STR_LIVERY_NAME_YEAR);
+	1:  string(STR_LIVERY_NAME_CC1_BR_GREEN);
+	2:  string(STR_LIVERY_NAME_CC2_BR_GREEN);
+	3:  string(STR_LIVERY_NAME_CC1_BR_GREEN_YLW);
+	4:  string(STR_LIVERY_NAME_CC2_BR_GREEN_YLW);
+	5:  string(STR_LIVERY_NAME_CC1_BR_BLUE);
+	6:  string(STR_LIVERY_NAME_CC2_BR_BLUE);
+	7:  string(STR_LIVERY_NAME_BR_GREEN);
+	8:  string(STR_LIVERY_NAME_BR_GREEN_YLW);
+	9:  string(STR_LIVERY_NAME_BR_BLUE);
+	
+	10:  string(STR_LIVERY_NAME_LNER);
+	11:  string(STR_LIVERY_NAME_LNER_A);
+	
+	12:  string(STR_LIVERY_NAME_LMS);
+	13:  string(STR_LIVERY_NAME_LMS_A);
+	
+	14:  string(STR_LIVERY_NAME_WAR);
+	15:  string(STR_LIVERY_NAME_BLACK);
+	return CB_RESULT_NO_TEXT;
+}
+
+//Sprite stack
+
+//Item
+
+item (FEAT_TRAINS, ITEM_FAI_CLASS_23) {
+	property {
+		name:							string(STR_NAME_LOCO_CLASS_23);  
+		climates_available:				ALL_CLIMATES;
+		introduction_date:				date(1959,1,1);
+		model_life:						40;
+		weight:                         74 ton ;
+		speed:							75 mph;
+		power:							1100 hp;
+		tractive_effort_coefficient:    0.259;
+		cost_factor:                    16 ;
+		running_cost_factor:            41 ;
+		length:							7;
+		vehicle_life:                   40 ;
+		refittable_cargo_classes:		bitmask(CC_PASSENGERS);
+		sprite_id:						SPRITE_ID_NEW_TRAIN;
+		misc_flags:						bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_SPRITE_STACK);
+		refit_cost:						0;
+		track_type:						RAIL;
+		ai_special_flag:				AI_FLAG_CARGO;
+		running_cost_base:				RUNNING_COST_DIESEL;
+		dual_headed:					0;
+		default_cargo_type:				PASS;
+		cargo_capacity:					1 ;
+		air_drag_coefficient:			0.08;
+		bitmask_vehicle_info:			0;
+		engine_class:                   ENGINE_CLASS_DIESEL ;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_DIESEL ;
+	}
+	graphics {
+		default: 							sw_class23_liverycheck;
+		cargo_subtype_text:					sw_class23_refit_text;
+		sound_effect:						sw_sfx_diesel_deltic ;
+		purchase_cargo_capacity:            0 ;
+		cargo_capacity:                     return 0 ;
+		create_effect:                      vfx_diesel_default ;
+		purchase:                           spriteset_class23_cc1_brgrn;
+	}
+}

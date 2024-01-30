@@ -1,0 +1,56 @@
+spriteset(spriteset_1945_eloco_f_gippslander,   "gfx/Electric - Freight/1945_eloco_f_gippslander.png") {template_32(7, 39)}
+spriteset(spriteset_1945_eloco_f_gippslander_r,   "gfx/Electric - Freight/1945_eloco_f_gippslander.png") {template_32_r(7, 82)}
+spriteset(spriteset_1945_eloco_f_gippslander_f,   "gfx/Electric - Freight/1945_eloco_f_gippslander.png") {template_32(7, 82)}
+spriteset(spriteset_1945_eloco_f_gippslander_f_r,   "gfx/Electric - Freight/1945_eloco_f_gippslander.png") {template_32_r(7, 39)}
+
+switch(FEAT_TRAINS, PARENT, sw_1945_eloco_f_gippslander_revcheck_flip, vehicle_is_reversed){
+	0 : spriteset_1945_eloco_f_gippslander_f;
+	return spriteset_1945_eloco_f_gippslander_f_r;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_1945_eloco_f_gippslander_revcheck, vehicle_is_reversed){
+	0 : spriteset_1945_eloco_f_gippslander;
+	return spriteset_1945_eloco_f_gippslander_r;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_1945_eloco_f_gippslander_flipcheck, vehicle_is_flipped){
+	0 : sw_1945_eloco_f_gippslander_revcheck;
+	return sw_1945_eloco_f_gippslander_revcheck_flip;
+}
+
+//Item
+
+item (FEAT_TRAINS, item_1945_eloco_f_gippslander) {
+	property {
+		climates_available:				ALL_CLIMATES;
+		model_life:						40;
+		length:							8;
+		vehicle_life:                   40 ;
+		refittable_cargo_classes:		bitmask(CC_PASSENGERS);
+		sprite_id:						SPRITE_ID_NEW_TRAIN;
+		misc_flags:						bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_SPRITE_STACK, TRAIN_FLAG_FLIP);
+		refit_cost:						0;
+		track_type:						ELRL;
+		ai_special_flag:				AI_FLAG_CARGO;
+		running_cost_base:				RUNNING_COST_ELECTRIC;
+		dual_headed:					0;
+		air_drag_coefficient:			0.08;
+		bitmask_vehicle_info:			0;
+		engine_class:                   ENGINE_CLASS_ELECTRIC ;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC ;
+		
+		introduction_date:				date(1945,1,1);
+		name:							string(str_name_1945_eloco_f_gippslander);  
+        tractive_effort_coefficient:    0.171;
+        weight:                         100 ton;
+        power:                          2400 hp;
+        speed:                          100 km/h;
+		
+		cost_factor:                    1 ;
+		running_cost_factor:            255 ;
+	}
+	graphics {
+		default: 							sw_1945_eloco_f_gippslander_flipcheck;
+		create_effect:                      vfx_ohle ;
+	}
+}

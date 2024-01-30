@@ -1,0 +1,66 @@
+//template_x_y where x is length and y is no. views
+
+template template_purchase_short(x,y){
+	[ x, y, 55, 12, -39, -8]
+}
+
+template base_32bpp(){
+	[0,0,1,1,0,0,"gfx/TEMPLATES/blank.png"] //North
+	[0,0,1,1,0,0,"gfx/TEMPLATES/blank.png"] //North East
+	[0,0,1,1,0,0,"gfx/TEMPLATES/blank.png"] //East
+	[0,0,1,1,0,0,"gfx/TEMPLATES/blank.png"] //South East
+	[0,0,1,1,0,0,"gfx/TEMPLATES/blank.png"] //South
+	[0,0,1,1,0,0,"gfx/TEMPLATES/blank.png"] //South West
+	[0,0,1,1,0,0,"gfx/TEMPLATES/blank.png"] //West
+	[0,0,1,1,0,0,"gfx/TEMPLATES/blank.png"] //North West
+}
+
+spriteset(gfx_blank){base_32bpp()}
+
+template template_32(x,y){
+    [ x+88 , y, 8 , 24,  -3, -14] 
+    [ x+97 , y, 22, 20, -16, -11]
+    [ x+120, y, 32, 16, -14, -12]
+    [ x+153, y, 22, 20,  -4, -11]
+    [ x    , y, 8 , 24,  -3, -14]
+    [ x+9  , y, 22, 20, -16, -11]
+    [ x+32 , y, 32, 16, -14, -12]
+    [ x+65 , y, 22, 20,  -4, -11]
+}
+
+template template_32_r(x,y){
+    [ x    , y, 8 , 24,  -3, -14]
+    [ x+9  , y, 22, 20, -16, -11]
+    [ x+32 , y, 32, 16, -14, -12]
+    [ x+65 , y, 22, 20,  -4, -11]
+    [ x+88 , y, 8 , 24,  -3, -14] 
+    [ x+97 , y, 22, 20, -16, -11]
+    [ x+120, y, 32, 16, -14, -12]
+    [ x+153, y, 22, 20,  -4, -11]
+}
+
+template template_24(x,y){
+    [ x+88 , y, 8 , 24,  -3, -14] 
+    [ x+97 , y, 22, 20, -16, -11]
+    [ x+120, y, 32, 16, -14, -12]
+    [ x+153, y, 22, 20,  -4, -11]
+    [ x    , y, 8 , 24,  -3, -14]
+    [ x+9  , y, 22, 20, -16, -11]
+    [ x+32 , y, 32, 16, -14, -12]
+    [ x+65 , y, 22, 20,  -4, -11]
+}
+
+template template_24_r(x,y){
+    [ x    , y, 8 , 24,  -3, -14]
+    [ x+9  , y, 22, 20, -16, -11]
+    [ x+32 , y, 32, 16, -14, -12]
+    [ x+65 , y, 22, 20,  -4, -11]
+    [ x+88 , y, 8 , 24,  -3, -14] 
+    [ x+97 , y, 22, 20, -16, -11]
+    [ x+120, y, 32, 16, -14, -12]
+    [ x+153, y, 22, 20,  -4, -11]
+}
+
+template template_purchase(x,y){
+	[ x, y, 63, 12, -14, -8]
+}

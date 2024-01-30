@@ -1,0 +1,49 @@
+spriteset(spriteset_1950_refrigerated_van_a,   "gfx/Freight Stock/Refrigerated Vans/1950_refrigerated_van_A_Default.png") {template_24(7, 39)}
+spriteset(spriteset_1950_refrigerated_van_b,   "gfx/Freight Stock/Refrigerated Vans/1950_refrigerated_van_B_Default.png") {template_24(7, 39)}
+spriteset(spriteset_1950_refrigerated_van_c,   "gfx/Freight Stock/Refrigerated Vans/1950_refrigerated_van_C_Default.png") {template_24(7, 39)}
+
+random_switch(FEAT_TRAINS, SELF, sw_1950_refrigerated_van_randsprite){
+	1: spriteset_1950_refrigerated_van_a;
+	2: spriteset_1950_refrigerated_van_b;
+	3: spriteset_1950_refrigerated_van_c;
+}
+item (FEAT_TRAINS, item_1950_refrigerated_van) {
+	property {
+		climates_available: 			ALL_CLIMATES;
+		retire_early:					1;
+		vehicle_life:					40;
+		reliability_decay:				7;
+		sprite_id:						SPRITE_ID_NEW_TRAIN;
+		misc_flags:						bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_SPRITE_STACK, TRAIN_FLAG_AUTOREFIT);
+		refit_cost:						0;
+		track_type:						RAIL;
+		ai_special_flag:				AI_FLAG_CARGO;
+		power:							0 hp;
+		running_cost_base:				RUNNING_COST_NONE;
+		dual_headed:					0;
+		air_drag_coefficient:			0.08;
+		bitmask_vehicle_info:			0;
+		
+		refittable_cargo_classes:		bitmask(CC_REFRIGERATED) ;
+		non_refittable_cargo_classes:	bitmask(CC_LIQUID) ;
+		default_cargo_type:				FOOD;
+		
+		model_life:						40;
+		
+		length:							6;
+		cost_factor:                    1;
+		running_cost_factor:            1;
+        loading_speed:                	5; 
+		
+		name: 							string(str_name_1950_refrigerated_van);
+		introduction_date:				date(1950, 1, 1);
+		
+        speed:                        	100 km/h;
+		weight:							20 ton;
+		cargo_capacity:					30;
+	}
+	graphics {
+	default: 							sw_1950_refrigerated_van_randsprite;
+	purchase:							spriteset_1950_refrigerated_van_a;
+}
+}

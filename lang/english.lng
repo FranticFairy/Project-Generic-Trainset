@@ -1,0 +1,97 @@
+##grflangid 0x01
+
+STR_GRF_NAME	:Project Generic Trains
+STR_GRF_DESC	:This set provides a plethora of generic style multiple units, locomotives and rolling stock primarily based on east Asian and Australasian designs. Sprites by {GOLD}Ragin1_{BLACK}, code by {GOLD}Fairyfloss{BLACK}
+
+STR_DESC_SUBURBAN:{GOLD}Suburban{BLACK} Train - {GREEN}Good{BLACK} capacity, {WHITE}Average{BLACK} speed
+STR_DESC_METRO:{GOLD}Metro{BLACK} Train - {GREEN}Great{BLACK} capacity, {WHITE}Low{BLACK} speed
+STR_DESC_INTERCITY:{GOLD}Intercity{BLACK} Train - {GREEN}Average{BLACK} capacity, {WHITE}Good{BLACK} speed
+STR_DESC_HST:{GOLD}High-Speed{BLACK} Train - {GREEN}Low{BLACK} capacity, {WHITE}Great{BLACK} speed
+
+STR_NO_COUPLE_MU_SAME:You may only couple this train to an "MU Coach", or another MU of the same type!
+STR_NO_COUPLE_MU:You may only couple this train to an "MU Coach", or another MU!
+STR_NO_COUPLE_MU_ONLY:You may only couple this train to an "MU Coach"!
+STR_NO_COUPLE:You may not couple anything to this train!
+STR_NO_COUPLE_SAME:You may only couple this train to another train of the same type!
+STR_CANNOT_START:This train is too long/short to start!
+
+STR_NAME_WAGON_MU:MU Coach
+
+str_name_1935_icsd_kooragang:Kooragang (EMU ICSD)
+str_name_1958_icsd_anderson:Anderson (EMU ICSD)
+str_name_1970_icdd_goose:Goose (EMU ICDD)
+str_name_1980_icsd_runner:Runner (EMU ICSD)
+str_name_1990_icdd_originator:Originator (EMU ICDD)
+str_name_2000_icdd_awabakal:Awabakal (EMU ICSD)
+str_name_2000_icsd_wallaby:Wallaby (EMU ICSD)
+str_name_2015_icsd_sonic:Sonic (EMU ICSD)
+
+str_name_1919_ssd_lucy:Lucy (EMU SSD)
+str_name_1935_ssd_rhodes:Rhodes (EMU SSD)
+str_name_1955_ssd_bluey:Bluey (EMU SSD)
+str_name_1974_sdd_silversider:Silver Sider (EMU SDD)
+str_name_1980_ssd_walker:Walker (EMU SSD)
+str_name_1987_sdd_togo:Togo (EMU SDD)
+str_name_2000_sdd_olympian:Olympian (EMU SDD)
+str_name_2000_ssd_suburbanite:Suburbanite (EMU SSD)
+str_name_2011_sdd_banko:Banko (EMU SDD)
+str_name_2015_ssd_cosmopolitan:Cosmopolitan (EMU SSD)
+str_name_2027_sdd_prism:Prism (EMU SDD)
+
+str_name_1925_m_hanei:Han'ei (EMU Metro)
+str_name_1939_m_senso:Senso (EMU Metro)
+str_name_1955_m_tokyu:Tokyu (EMU Metro)
+str_name_1970_m_laurel:Laurel (EMU Metro)
+str_name_1990_m_ichi:Ichi (EMU Metro)
+str_name_2001_m_haru:Haru (EMU Metro)
+str_name_2040_m_nishi:Nishi (EMU Metro)
+str_name_2060_m_shaka:Shaka (EMU Metro)
+
+str_name_1937_ic_frosty:Frosty (DMU IC)
+str_name_1951_ic_bunyip:Bunyip (DMU IC)
+str_name_1970_ic_yowie:Yowie (DMU IC)
+str_name_1993_ic_discoverer:Discoverer (DMU IC)
+str_name_2010_ic_haste:Haste (DMU IC)
+
+str_name_1955_s_willie:Willie (DMU Suburban)
+str_name_1975_s_buddy:Buddy (DMU Suburban)
+str_name_1995_s_warrigal:Warrigal (DMU Suburban)
+
+str_name_1957_dloco_f_junee:Junee (Freight Diesel)
+str_name_1966_dloco_f_freightcrisis:Crisis (Freight Diesel)
+
+str_name_1947_dloco_hf_shea:Shea (Heavy Freight Diesel)
+str_name_1957_dloco_hf_globe:Globe (Heavy Freight Diesel)
+str_name_1987_dloco_hf_biglad:Big Lad (Heavy Freight Diesel)
+
+str_name_1986_eloco_ep_bigthinker:Big Thinker (Express Passenger Electric)
+
+str_name_1923_eloco_f_lyttleton:Lyttleton (Freight Electric)
+str_name_1931_eloco_f_baltic:Baltic (Freight Electric)
+str_name_1945_eloco_f_gippslander:Gippslander (Freight Electric)
+str_name_1956_eloco_f_sheffielder:Sheffielder (Freight Electric)
+str_name_1964_eloco_f_sherpa:Sherpa (Freight Electric)
+str_name_1976_eloco_f_colomatta:Colomatta (Freight Electric)
+str_name_1983_eloco_f_nikkin:Nikkin (Freight Electric)
+
+str_name_1870_ssd_coach:Suburban Coach (1870)
+str_name_1890_ssd_coach:Suburban Coach (1890)
+str_name_1910_ssd_coach:Suburban Coach (1910)
+str_name_1930_ssd_coach:Suburban Coach (1930)
+str_name_1950_ssd_coach:Suburban Coach (1950)
+str_name_1970_ssd_coach:Suburban Coach (1970)
+str_name_1990_ssd_coach:Suburban Coach (1990)
+str_name_2010_ssd_coach:Suburban Coach (2010)
+
+str_name_1950_box_van:Box Van (1950)
+str_name_1970_box_van:Box Van (1970)
+str_name_1990_box_van:Box Van (1990)
+
+str_name_1950_refrigerated_van:Refrigerated Van (1950)
+str_name_1970_refrigerated_van:Refrigerated Van (1970)
+str_name_1990_refrigerated_van:Refrigerated Van (1990)
+
+str_name_1950_coal_hopper:Coal Hopper (1950)
+str_name_1970_coal_hopper:Coal Hopper (1970)
+str_name_1990_coal_hopper:Coal Hopper (1990)
+str_name_2010_coal_hopper:Coal Hopper (2010)

@@ -1,0 +1,38 @@
+spriteset(spriteset_1986_eloco_ep_bigthinker,   "gfx/Electric - Express Passenger/1986_eloco_ep_bigthinker.png") {template_32(7, 39)}
+
+//Item
+
+item (FEAT_TRAINS, item_1986_eloco_ep_bigthinker) {
+	property {
+		climates_available:				ALL_CLIMATES;
+		model_life:						40;
+		length:							8;
+		vehicle_life:                   40 ;
+		refittable_cargo_classes:		bitmask(CC_PASSENGERS);
+		sprite_id:						SPRITE_ID_NEW_TRAIN;
+		misc_flags:						bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_SPRITE_STACK);
+		refit_cost:						0;
+		track_type:						ELRL;
+		ai_special_flag:				AI_FLAG_PASSENGER;
+		running_cost_base:				RUNNING_COST_ELECTRIC;
+		dual_headed:					0;
+		air_drag_coefficient:			0.08;
+		bitmask_vehicle_info:			0;
+		engine_class:                   ENGINE_CLASS_ELECTRIC ;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_ELECTRIC ;
+		
+		introduction_date:				date(1986,1,1);
+		name:							string(str_name_1986_eloco_ep_bigthinker);  
+        tractive_effort_coefficient:    0.130;
+        weight:                         110 ton;
+        power:                          4000 hp;
+        speed:                          160 km/h;
+		
+		cost_factor:                    1 ;
+		running_cost_factor:            1 ;
+	}
+	graphics {
+		default: 							spriteset_1986_eloco_ep_bigthinker;
+		create_effect:                      vfx_ohle ;
+	}
+}

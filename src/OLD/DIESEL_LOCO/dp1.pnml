@@ -1,0 +1,124 @@
+spriteset(spriteset_dp1_cc1, "gfx/DIESEL_LOCO/Deltic.png") { template_fai_uk_33_single(0, 90)}
+spriteset(spriteset_dp1_cc2, "gfx/DIESEL_LOCO/DelticCC2.png") { template_fai_uk_33_single(0, 90)}
+spriteset(spriteset_dp1_cc1_cc2, "gfx/DIESEL_LOCO/Deltic_dp1.png") { template_fai_uk_33_single(0, 0)}
+spriteset(spriteset_dp1_cc2_cc1, "gfx/DIESEL_LOCO/Deltic_dp1.png") { template_fai_uk_33_single(0, 30)}
+
+spriteset(spriteset_dp1_brdp1, "gfx/DIESEL_LOCO/Deltic.png") { template_fai_uk_33_single(0, 90)}
+alternative_sprites(spriteset_dp1_brdp1, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/Deltic_32bpp.png"){ template_fai_uk_33_single(0,90)}
+
+spriteset(spriteset_dp1_silver, "gfx/DIESEL_LOCO/Deltic.png") { template_fai_uk_33_single(0, 0)}
+alternative_sprites(spriteset_dp1_silver, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/deltic_dp1_32bpp.png"){ template_fai_uk_33_single(0,0)}
+
+spriteset(spriteset_dp1_ic, "gfx/DIESEL_LOCO/Deltic.png") { template_fai_uk_33_single(0, 0)}
+alternative_sprites(spriteset_dp1_ic, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/deltic_dp1_32bpp.png"){ template_fai_uk_33_single(0,30)}
+
+spriteset(spriteset_dp1_war, "gfx/DIESEL_LOCO/Deltic.png") { template_fai_uk_33_single(0, 0)}
+alternative_sprites(spriteset_dp1_war, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/deltic_dp1_32bpp.png"){ template_fai_uk_33_single(0,60)}
+
+spriteset(spriteset_dp1_grn, "gfx/DIESEL_LOCO/Deltic.png") { template_fai_uk_33_single(0, 0)}
+alternative_sprites(spriteset_dp1_grn, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/deltic_dp1_32bpp.png"){ template_fai_uk_33_single(0,90)}
+
+spriteset(spriteset_dp1_lner, "gfx/DIESEL_LOCO/Deltic.png") { template_fai_uk_33_single(0, 0)}
+alternative_sprites(spriteset_dp1_lner, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/deltic_dp1_32bpp.png"){ template_fai_uk_33_single(0,120)}
+
+spriteset(spriteset_dp1_lms, "gfx/DIESEL_LOCO/Deltic.png") { template_fai_uk_33_single(0, 0)}
+alternative_sprites(spriteset_dp1_lms, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/deltic_dp1_32bpp.png"){ template_fai_uk_33_single(0,150)}
+
+spriteset(spriteset_dp1_sr, "gfx/DIESEL_LOCO/Deltic.png") { template_fai_uk_33_single(0, 0)}
+alternative_sprites(spriteset_dp1_sr, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/deltic_dp1_32bpp.png"){ template_fai_uk_33_single(0,180)}
+
+spriteset(spriteset_dp1_gold, "gfx/DIESEL_LOCO/Deltic.png") { template_fai_uk_33_single(0, 0)}
+alternative_sprites(spriteset_dp1_gold, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/deltic_dp1_32bpp.png"){ template_fai_uk_33_single(0,210)}
+
+spriteset(spriteset_dp1_blue, "gfx/DIESEL_LOCO/Deltic.png") { template_fai_uk_33_single(0, 0)}
+alternative_sprites(spriteset_dp1_blue, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/deltic_dp1_32bpp.png"){ template_fai_uk_33_single(0,240)}
+
+switch(FEAT_TRAINS, SELF, sw_dp1_yearcheck, current_year){
+	0..1963		: spriteset_dp1_brdp1 ;
+	1964..1966	: spriteset_dp1_grn ;
+	1967..1984	: spriteset_dp1_blue ;
+	spriteset_dp1_ic ;
+}
+
+switch(FEAT_TRAINS, SELF, sw_dp1_liverycheck, cargo_subtype){
+	1:  spriteset_dp1_cc1;
+	2:  spriteset_dp1_cc2;
+	3:  spriteset_dp1_cc1_cc2;
+	4:  spriteset_dp1_cc2_cc1;
+	
+	5:  spriteset_dp1_brdp1;
+	6:  spriteset_dp1_silver;
+	7:  spriteset_dp1_ic;
+	8:  spriteset_dp1_war;
+	9:  spriteset_dp1_grn;
+	10: spriteset_dp1_lner;
+	11: spriteset_dp1_lms;
+	12: spriteset_dp1_sr;
+	13: spriteset_dp1_gold;
+	14: spriteset_dp1_blue;
+	return sw_dp1_yearcheck;
+}
+
+switch(FEAT_TRAINS, SELF, sw_dp1_refit_text, cargo_subtype){
+	0:  string(STR_LIVERY_NAME_YEAR);
+	1:  string(STR_LIVERY_NAME_CC1);
+	2:  string(STR_LIVERY_NAME_CC2);
+	3:  string(STR_LIVERY_NAME_CC1_CC2);
+	4:  string(STR_LIVERY_NAME_CC2_CC1);
+	
+	5:  string(STR_LIVERY_NAME_DELTIC_DP1);
+	6:  string(STR_LIVERY_NAME_SILVER);
+	7:  string(STR_LIVERY_NAME_BR_IC);
+	8:  string(STR_LIVERY_NAME_BLACK);
+	9:  string(STR_LIVERY_NAME_BR_GREEN);
+	10: string(STR_LIVERY_NAME_LNER);
+	11: string(STR_LIVERY_NAME_LMS);
+	12: string(STR_LIVERY_NAME_SR);
+	13: string(STR_LIVERY_NAME_GOLD);
+	14: string(STR_LIVERY_NAME_BR_BLUE);
+	return CB_RESULT_NO_TEXT;
+}
+
+//Sprite stack
+
+//Item
+
+item (FEAT_TRAINS, ITEM_FAI_CLASS_DP1) {
+	property {
+		name:							string(STR_NAME_LOCO_CLASS_DP1);  
+		climates_available:				ALL_CLIMATES;
+		introduction_date:				date(1956,1,1);
+		model_life:						40;
+		weight:                         101 ton ;
+		speed:							90 mph;
+		power:							3300 hp;
+		tractive_effort_coefficient:    0.217;
+		cost_factor:                    67 ;
+		running_cost_factor:            152 ;
+		length:							8;
+		vehicle_life:                   40 ;
+		refittable_cargo_classes:		bitmask(CC_PASSENGERS);
+		sprite_id:						SPRITE_ID_NEW_TRAIN;
+		misc_flags:						bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_SPRITE_STACK);
+		refit_cost:						0;
+		track_type:						RAIL;
+		ai_special_flag:				AI_FLAG_CARGO;
+		running_cost_base:				RUNNING_COST_DIESEL;
+		dual_headed:					0;
+		default_cargo_type:				PASS;
+		cargo_capacity:					1 ;
+		air_drag_coefficient:			0.08;
+		bitmask_vehicle_info:			0;
+		engine_class:                   ENGINE_CLASS_DIESEL ;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_DIESEL ;
+	}
+	graphics {
+		default: 							sw_dp1_liverycheck;
+		cargo_subtype_text:					sw_dp1_refit_text;
+		sound_effect:						sw_sfx_diesel_deltic ;
+		purchase_cargo_capacity:            0 ;
+		cargo_capacity:                     return 0 ;
+		create_effect:                      vfx_diesel_default ;
+		purchase:                           spriteset_dp1_cc1;
+	}
+}

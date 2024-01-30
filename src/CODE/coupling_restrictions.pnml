@@ -1,0 +1,5 @@
+switch(FEAT_TRAINS, SELF, sw_mu_coupling, vehicle_type_id) {
+    item_sdd_1974_silversider: CB_RESULT_ATTACH_ALLOW;
+    item_pgt_mu_coach: CB_RESULT_ATTACH_ALLOW;
+    return string(STR_NO_COUPLE_MU);
+}

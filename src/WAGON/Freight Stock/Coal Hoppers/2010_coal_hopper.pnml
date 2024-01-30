@@ -1,0 +1,52 @@
+spriteset(spriteset_2010_coal_hopper,   "gfx/Freight Stock/Coal Hoppers/2010_coal_hopper_coal_refit.png") {template_32(7, 39)}
+spriteset(spriteset_2010_coal_hopper_h,   "gfx/Freight Stock/Coal Hoppers/2010_coal_hopper_coal_refit.png") {template_32(7, 82)}
+spriteset(spriteset_2010_coal_hopper_f,   "gfx/Freight Stock/Coal Hoppers/2010_coal_hopper_coal_refit.png") {template_32(7, 125)}
+
+switch(FEAT_TRAINS, SELF, sw_2010_coal_hopper_fullcheck, PERCENT_FULL){
+	1..50	: spriteset_2010_coal_hopper_h ;
+	51..100	: spriteset_2010_coal_hopper_f ;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2010_coal_hopper_spritestack, SPR_STACK){
+	0 : spriteset_2010_coal_hopper ;
+	1 : sw_2010_coal_hopper_fullcheck ;
+}
+
+item (FEAT_TRAINS, item_2010_coal_hopper) {
+	property {
+		climates_available: 			ALL_CLIMATES;
+		retire_early:					1;
+		vehicle_life:					40;
+		reliability_decay:				7;
+		sprite_id:						SPRITE_ID_NEW_TRAIN;
+		misc_flags:						bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_SPRITE_STACK, TRAIN_FLAG_AUTOREFIT);
+		refit_cost:						0;
+		track_type:						RAIL;
+		ai_special_flag:				AI_FLAG_CARGO;
+		power:							0 hp;
+		running_cost_base:				RUNNING_COST_NONE;
+		dual_headed:					0;
+		air_drag_coefficient:			0.08;
+		bitmask_vehicle_info:			0;
+		
+		default_cargo_type:				COAL;
+		
+		model_life:						40;
+		
+		length:							8;
+		cost_factor:                    1;
+		running_cost_factor:            1;
+        loading_speed:                	5; 
+		
+		name: 							string(str_name_2010_coal_hopper);
+		introduction_date:				date(2010, 1, 1);
+		
+        speed:                        	130 km/h;
+		weight:							20 ton;
+		cargo_capacity:					100;
+	}
+	graphics {
+	default: 							sw_2010_coal_hopper_spritestack;
+	purchase:							spriteset_2010_coal_hopper;
+}
+}

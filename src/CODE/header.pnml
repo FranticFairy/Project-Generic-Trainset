@@ -1,0 +1,16 @@
+grf{
+	grfid: "PGTS" ;
+	name: string(STR_GRF_NAME) ;
+	desc: string(STR_GRF_DESC) ;
+	version: 2 ;
+	min_compatible_version: 1 ;
+}
+
+
+train_width_32_px  = 1 ;
+traininfo_y_offset = 2 ;
+#define SPR_STACK [STORE_TEMP((getbits(extra_callback_info1, 8, 8) < 2 ? CB_FLAG_MORE_SPRITES : 0) | PALETTE_USE_DEFAULT, 0x100), getbits(extra_callback_info1, 8, 8)]
+#define PERCENT_FULL cargo_count * (100 / cargo_capacity)
+// Tractive Effort Coefficient = Actual Tractive effort / Weight / 10
+
+//Modifying base costs

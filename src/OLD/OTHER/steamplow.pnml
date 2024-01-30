@@ -1,0 +1,60 @@
+spriteset(spriteset_steamplow, "gfx/OTHER/steamplow.png") {
+	steamplow_front(0, 0)
+}
+spriteset(spriteset_steamplow_purchase, "gfx/OTHER/steamplow-buy.png") {
+	template_purchase(0, 0)
+}
+
+switch(FEAT_TRAINS, SELF, sw_steamplow_articulated_part, extra_callback_info1) {
+    /* Add three articulated parts, for a total of four */
+    1: return item_steamplow_tender;
+    return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+/* Define the actual train */
+item(FEAT_TRAINS, item_steamplow) {
+    /* Define properties first, make sure to set all of them */
+    property {
+        name:                         string(STR_NAME_STEAMPLOW);
+        // not available in toyland:
+        climates_available:           ALL_CLIMATES; 
+        introduction_date:            date(1912, 1, 1);
+        model_life:                   45;
+        vehicle_life:                 30;
+        reliability_decay:            20;
+        loading_speed:                6; 
+        cost_factor:                  45;
+        running_cost_factor:          100; // Changed by callback
+        sprite_id:                    SPRITE_ID_NEW_TRAIN;
+        speed:                        60 km/h; // actually 140, but there are rounding errors
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU, TRAIN_FLAG_SPRITE_STACK);
+        refit_cost:                   0; //refit costs don't apply to subcargo display 
+        // callback flags are not set manually
+        track_type:                   RAIL; // from rail type table
+        ai_special_flag:              AI_FLAG_PASSENGER;
+        power:                        745 kW; // Changed by CB
+        running_cost_base:            RUNNING_COST_STEAM;
+        weight:                       90 ton; // Total, changed by callback
+        ai_engine_rank:               0; // not intended to be used by the ai
+        engine_class:                 ENGINE_CLASS_STEAM;
+        extra_power_per_wagon:        0 kW;
+        // 4/12 of weight on driving wheels, with a default friction coefficient of 0.3:
+        tractive_effort_coefficient:  0.3; // changed by callback
+        air_drag_coefficient:         0.06;
+        // Overridden by callback to disable for non-powered wagons:
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_STEAM ;
+        extra_weight_per_wagon:       0 ton;
+        bitmask_vehicle_info:         0;
+		length:							6;
+		dual_headed                    : 0 ;
+    }
+    /* Define graphics and callbacks
+     * Setting all callbacks is not needed, only define what is used */
+    graphics {
+        default				:	spriteset_steamplow;
+		create_effect		:	vfx_steam ;
+		purchase			:	spriteset_steamplow_purchase;
+		sound_effect		:	sw_sfx_steam_fai ;
+        articulated_part	:	sw_steamplow_articulated_part;
+    }
+}

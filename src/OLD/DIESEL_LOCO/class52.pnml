@@ -1,0 +1,94 @@
+spriteset(spriteset_class52_cc1_brgrn, "gfx/DIESEL_LOCO/class_52.png") { template_fai_uk_33_single(0, 0)}
+spriteset(spriteset_class52_cc1_brylw, "gfx/DIESEL_LOCO/class_52.png") { template_fai_uk_33_single(0, 30)}
+
+spriteset(spriteset_class52_cc2_brgrn, "gfx/DIESEL_LOCO/class_52.png") { template_fai_uk_33_single(0, 0)}
+spriteset(spriteset_class52_cc2_brylw, "gfx/DIESEL_LOCO/class_52.png") { template_fai_uk_33_single(0, 30)}
+
+spriteset(spriteset_class52_maroon, "gfx/DIESEL_LOCO/class_52.png") { template_fai_uk_33_single(0, 0)}
+alternative_sprites(spriteset_class52_maroon, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_52_32bpp.png"){ template_fai_uk_33_single(0,90)}
+spriteset(spriteset_class52_brblu, "gfx/DIESEL_LOCO/class_52.png") { template_fai_uk_33_single(0, 60)}
+alternative_sprites(spriteset_class52_brblu, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_52_32bpp.png"){ template_fai_uk_33_single(0,30)}
+
+spriteset(spriteset_class52_black, "gfx/DIESEL_LOCO/class_52.png") { template_fai_uk_33_single(0, 60)}
+alternative_sprites(spriteset_class52_black, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_52_32bpp.png"){ template_fai_uk_33_single(0,0)}
+spriteset(spriteset_class52_lner, "gfx/DIESEL_LOCO/class_52.png") { template_fai_uk_33_single(0, 60)}
+alternative_sprites(spriteset_class52_lner, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_52_32bpp.png"){ template_fai_uk_33_single(0,60)}
+spriteset(spriteset_class52_brgrn, "gfx/DIESEL_LOCO/class_52.png") { template_fai_uk_33_single(0, 60)}
+alternative_sprites(spriteset_class52_brgrn, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DIESEL_LOCO/class_52_32bpp.png"){ template_fai_uk_33_single(0,120)}
+
+
+switch(FEAT_TRAINS, SELF, sw_class52_yearcheck, current_year){
+	0..1966	: spriteset_class52_maroon ;
+	spriteset_class52_brblu ;
+}
+
+switch(FEAT_TRAINS, SELF, sw_class52_liverycheck, cargo_subtype){
+	1:  spriteset_class52_cc1_brgrn;
+	2:  spriteset_class52_cc2_brgrn;
+	3:  spriteset_class52_cc1_brylw;
+	4:  spriteset_class52_cc2_brylw;
+	5:  spriteset_class52_maroon;
+	6:  spriteset_class52_brblu;
+	7:  spriteset_class52_black;
+	8:  spriteset_class52_lner;
+	9:  spriteset_class52_brgrn;
+	return sw_class52_yearcheck;
+}
+
+switch(FEAT_TRAINS, SELF, sw_class52_refit_text, cargo_subtype){
+	0:  string(STR_LIVERY_NAME_YEAR);
+	1:  string(STR_LIVERY_NAME_CC1_BR_GREEN);
+	2:  string(STR_LIVERY_NAME_CC2_BR_GREEN);
+	3:  string(STR_LIVERY_NAME_CC1_BR_GREEN_YLW);
+	4:  string(STR_LIVERY_NAME_CC2_BR_GREEN_YLW);
+	5:  string(STR_LIVERY_NAME_MAROON);
+	6:  string(STR_LIVERY_NAME_BR_BLUE);
+	7:  string(STR_LIVERY_NAME_BLACK);
+	8:  string(STR_LIVERY_NAME_LNER);
+	9:  string(STR_LIVERY_NAME_BR_GREEN);
+	return CB_RESULT_NO_TEXT;
+}
+
+//Sprite stack
+
+//Item
+
+item (FEAT_TRAINS, ITEM_FAI_CLASS_52) {
+	property {
+		name:							string(STR_NAME_LOCO_CLASS_52);  
+		climates_available:				ALL_CLIMATES;
+		introduction_date:				date(1962,1,1);
+		model_life:						40;
+		weight:                         108 ton ;
+		speed:							90 mph;
+		power:							2700 hp;
+		tractive_effort_coefficient:    0.275;
+		cost_factor:                    51 ;
+		running_cost_factor:            107 ;
+		length:							8;
+		vehicle_life:                   40 ;
+		refittable_cargo_classes:		bitmask(CC_PASSENGERS);
+		sprite_id:						SPRITE_ID_NEW_TRAIN;
+		misc_flags:						bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_SPRITE_STACK);
+		refit_cost:						0;
+		track_type:						RAIL;
+		ai_special_flag:				AI_FLAG_CARGO;
+		running_cost_base:				RUNNING_COST_DIESEL;
+		dual_headed:					0;
+		default_cargo_type:				PASS;
+		cargo_capacity:					1 ;
+		air_drag_coefficient:			0.08;
+		bitmask_vehicle_info:			0;
+		engine_class:                   ENGINE_CLASS_DIESEL ;
+		effect_spawn_model_and_powered: EFFECT_SPAWN_MODEL_DIESEL ;
+	}
+	graphics {
+		default: 							sw_class52_liverycheck;
+		cargo_subtype_text:					sw_class52_refit_text;
+		sound_effect:						sw_sfx_diesel_default ;
+		purchase_cargo_capacity:            0 ;
+		cargo_capacity:                     return 0 ;
+		create_effect:                      vfx_diesel_default ;
+		purchase:                           spriteset_class52_cc1_brgrn;
+	}
+}

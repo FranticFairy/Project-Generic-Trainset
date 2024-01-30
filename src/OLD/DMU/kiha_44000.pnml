@@ -1,0 +1,113 @@
+spriteset(spriteset_kiha_44000_f, "gfx/DMU/kiha_44000.png") {
+	template_8_8_networker(0, 0)
+}
+spriteset(spriteset_kiha_44000_r, "gfx/DMU/kiha_44000.png") {
+	template_8_8_networker(0, 25)
+}
+spriteset(spriteset_kiha_44000_m, "gfx/DMU/kiha_44000.png") {
+	template_8_8_networker(0, 50)
+}
+spriteset(spriteset_kiha_44000_purchase, "gfx/DMU/kiha_44000.png") {
+	template_purchase(0, 125)
+}
+
+//Sprite stack
+
+switch(FEAT_TRAINS, SELF, sw_kiha44000_gfx_set_of_3, position_in_consist % 3) {
+    0:      spriteset_kiha_44000_f;
+    2:      spriteset_kiha_44000_r;
+   spriteset_kiha_44000_m;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha44000_gfx_last_2, position_in_consist_from_end){
+    0:      spriteset_kiha_44000_r;
+    1:      spriteset_kiha_44000_f;
+	sw_kiha44000_gfx_set_of_3;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha44000_gfx_last_4, position_in_consist_from_end){
+    0:      spriteset_kiha_44000_r;
+    1:      spriteset_kiha_44000_f;
+    2:      spriteset_kiha_44000_r;
+    3:      spriteset_kiha_44000_f;
+	sw_kiha44000_gfx_set_of_3;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha44000_lengthcheck_two, num_vehs_in_consist % 3){
+	1 : sw_kiha44000_gfx_last_4;
+	2 : sw_kiha44000_gfx_last_2;
+	sw_kiha44000_gfx_set_of_3;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha44000_lengthcheck, num_vehs_in_consist){
+	1 : spriteset_coach_more;
+	return sw_kiha44000_lengthcheck_two;
+}
+switch(FEAT_TRAINS, SELF, sw_kiha44000_start_stop, num_vehs_in_consist) {
+    1: return string(STR_CANNOT_START);
+    return CB_RESULT_NO_TEXT;
+}
+
+ 
+switch(FEAT_TRAINS, SELF, sw_kiha44000_attach, vehicle_type_id){
+	item_WAGON_MU	: return CB_RESULT_ATTACH_ALLOW  ;
+	item_kiha44000		: return CB_RESULT_ATTACH_ALLOW  ;
+	return string(STR_NO_COUPLE) ;
+}
+
+/* Define the actual train */
+item(FEAT_TRAINS, item_kiha44000) {
+    /* Define properties first, make sure to set all of them */
+    property {
+        name:                         string(STR_NAME_KIHA_44000);
+        // not available in toyland:
+        climates_available:           ALL_CLIMATES; 
+        introduction_date:            date(1937, 1, 1);
+        model_life:                   25;
+        vehicle_life:                 30;
+        reliability_decay:            20;
+		refittable_cargo_classes:		CC_PASSENGERS ;
+		cargo_allow_refit:				[PASS, TOUR] ;
+		cargo_capacity:					40 ;
+        loading_speed:                6; 
+        cost_factor:                  45;
+        running_cost_factor:          100;
+        sprite_id:                    SPRITE_ID_NEW_TRAIN;
+        speed:                        95 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_MU, TRAIN_FLAG_SPRITE_STACK);
+        refit_cost:                   0;
+        // callback flags are not set manually
+        track_type:                   RAIL;
+        ai_special_flag:              AI_FLAG_PASSENGER;
+        power:                        560 kW;
+        running_cost_base:            RUNNING_COST_DIESEL;
+        weight:                       45 ton;
+        ai_engine_rank:               0;
+        engine_class:                 ENGINE_CLASS_DIESEL;
+        extra_power_per_wagon:        0 kW;
+        tractive_effort_coefficient:  0.3; // changed by callback
+        air_drag_coefficient:         0.06;
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_DIESEL ;
+        extra_weight_per_wagon:       0 ton;
+        bitmask_vehicle_info:         0;
+		dual_headed                    : 0 ;
+    }
+    /* Define graphics and callbacks
+     * Setting all callbacks is not needed, only define what is used */
+    graphics {
+        default:                      sw_kiha44000_lengthcheck;
+		can_attach_wagon        		: sw_kiha44000_attach ;
+		create_effect           		: vfx_diesel_default ;
+		sound_effect:						sw_sfx_diesel_fai_old ;
+        start_stop			:	sw_kiha44000_start_stop;
+		purchase			:	spriteset_kiha_44000_purchase;
+    }
+	livery_override (item_WAGON_MU){
+		default                     : sw_kiha44000_lengthcheck ;
+		cargo_capacity              : 40 ;
+		power                       : 105 ;
+		weight                      : 40 ;
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_DIESEL ;
+		create_effect           : vfx_diesel_default ;
+	}
+}

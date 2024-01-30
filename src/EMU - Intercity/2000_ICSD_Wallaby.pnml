@@ -1,0 +1,210 @@
+spriteset(spriteset_2000_icsd_wallaby_fp,   "gfx/EMU - Intercity/2000_icsd_wallaby.png") {template_32(7, 39)}
+spriteset(spriteset_2000_icsd_wallaby_rp,   "gfx/EMU - Intercity/2000_icsd_wallaby.png") {template_32(7, 64)}
+spriteset(spriteset_2000_icsd_wallaby_f,    "gfx/EMU - Intercity/2000_icsd_wallaby.png") {template_32(185, 39)}
+spriteset(spriteset_2000_icsd_wallaby_r,    "gfx/EMU - Intercity/2000_icsd_wallaby.png") {template_32(185, 64)}
+spriteset(spriteset_2000_icsd_wallaby_c,    "gfx/EMU - Intercity/2000_icsd_wallaby.png") {template_32(7, 89)}
+spriteset(spriteset_2000_icsd_wallaby_cp,   "gfx/EMU - Intercity/2000_icsd_wallaby.png") {template_32(185, 89)}
+spriteset(spriteset_2000_icsd_wallaby_c_r,  "gfx/EMU - Intercity/2000_icsd_wallaby.png") {template_32_r(7, 89)}
+spriteset(spriteset_2000_icsd_wallaby_cp_r, "gfx/EMU - Intercity/2000_icsd_wallaby.png") {template_32_r(185, 89)}
+
+// C O D E
+
+//Backward
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_pantocheck_at_2_r, position_in_vehid_chain % 3){
+	2 : spriteset_2000_icsd_wallaby_cp_r;
+	return spriteset_2000_icsd_wallaby_c_r;
+}
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_pantocheck_at_2r_r, position_in_vehid_chain_from_end % 3){
+	2 : spriteset_2000_icsd_wallaby_cp;
+	return spriteset_2000_icsd_wallaby_c_r;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_pantocheck_at_1_r, position_in_vehid_chain % 2){
+	1 : spriteset_2000_icsd_wallaby_cp_r;
+	return spriteset_2000_icsd_wallaby_c_r;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_pantocheck_at_0_r, position_in_vehid_chain % 2){
+	1 : spriteset_2000_icsd_wallaby_c_r;
+	return spriteset_2000_icsd_wallaby_cp;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_pantocheck_at_1r_r, position_in_vehid_chain_from_end % 2){
+	1 : spriteset_2000_icsd_wallaby_cp;
+	return spriteset_2000_icsd_wallaby_c_r;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_sidecheck_other_r, num_vehs_in_vehid_chain/2 > position_in_vehid_chain ) {
+	1 : sw_2000_icsd_wallaby_pantocheck_at_1_r;
+	return sw_2000_icsd_wallaby_pantocheck_at_1r_r;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_sidecheck_4_r, num_vehs_in_vehid_chain/2 > position_in_vehid_chain ) {
+	1 : spriteset_2000_icsd_wallaby_c_r;
+	return sw_2000_icsd_wallaby_pantocheck_at_0_r;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_sidecheck_6_r, num_vehs_in_vehid_chain/2 > position_in_vehid_chain ) {
+	1 : sw_2000_icsd_wallaby_pantocheck_at_2_r;
+	return sw_2000_icsd_wallaby_pantocheck_at_2r_r;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_lencheck_r, num_vehs_in_vehid_chain ) {
+	0 .. 2 : spriteset_2000_icsd_wallaby_c_r;
+	3 : sw_2000_icsd_wallaby_pantocheck_at_1_r;
+	4 : sw_2000_icsd_wallaby_sidecheck_4_r;
+	5 : sw_2000_icsd_wallaby_pantocheck_at_2_r;
+	6 .. 7 : sw_2000_icsd_wallaby_sidecheck_6_r;
+	return sw_2000_icsd_wallaby_sidecheck_other_r;
+}
+
+//Forward
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_pantocheck_at_2, position_in_vehid_chain % 3){
+	2 : spriteset_2000_icsd_wallaby_cp_r;
+	return spriteset_2000_icsd_wallaby_c;
+}
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_pantocheck_at_2r, position_in_vehid_chain_from_end % 3){
+	2 : spriteset_2000_icsd_wallaby_cp;
+	return spriteset_2000_icsd_wallaby_c;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_pantocheck_at_1, position_in_vehid_chain % 2){
+	1 : spriteset_2000_icsd_wallaby_cp_r;
+	return spriteset_2000_icsd_wallaby_c;
+}
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_pantocheck_at_1r, position_in_vehid_chain_from_end % 2){
+	1 : spriteset_2000_icsd_wallaby_cp;
+	return spriteset_2000_icsd_wallaby_c;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_sidecheck_other, num_vehs_in_vehid_chain/2 > position_in_vehid_chain ) {
+	1 : sw_2000_icsd_wallaby_pantocheck_at_1;
+	return sw_2000_icsd_wallaby_pantocheck_at_1r;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_sidecheck_4, num_vehs_in_vehid_chain/2 > position_in_vehid_chain ) {
+	1 : sw_2000_icsd_wallaby_pantocheck_at_1;
+	return spriteset_2000_icsd_wallaby_c;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_sidecheck_6, num_vehs_in_vehid_chain/2 > position_in_vehid_chain ) {
+	1 : sw_2000_icsd_wallaby_pantocheck_at_2;
+	return sw_2000_icsd_wallaby_pantocheck_at_2r;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_lencheck, num_vehs_in_vehid_chain ) {
+	0 .. 2 : spriteset_2000_icsd_wallaby_c;
+	3 : sw_2000_icsd_wallaby_pantocheck_at_1;
+	4 : sw_2000_icsd_wallaby_sidecheck_4;
+	5 : sw_2000_icsd_wallaby_pantocheck_at_2;
+	6 .. 7 : sw_2000_icsd_wallaby_sidecheck_6;
+	return sw_2000_icsd_wallaby_sidecheck_other;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_panto_direction_r_pos, position_in_vehid_chain_from_end){
+	0: spriteset_2000_icsd_wallaby_fp; //Panto
+	return spriteset_2000_icsd_wallaby_f; //No Panto
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_panto_direction_r, vehicle_is_flipped){
+	0 : sw_2000_icsd_wallaby_panto_direction_r_pos;		//Front panto
+	return spriteset_2000_icsd_wallaby_rp;    //Rear panto
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_panto_flipcheck_r, vehicle_is_flipped){
+	0 : sw_2000_icsd_wallaby_panto_direction_r;		//Not flipped, give Panto
+	return spriteset_2000_icsd_wallaby_rp;    //Flipped, no panto
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_frontcheck_r, position_in_vehid_chain){
+	0: sw_2000_icsd_wallaby_panto_direction_r; //We need a pantograph, guaranteed
+	return sw_2000_icsd_wallaby_panto_flipcheck_r; //More Checks
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_panto_direction, vehicle_is_flipped){
+	0 : spriteset_2000_icsd_wallaby_fp;		//Front panto
+	return spriteset_2000_icsd_wallaby_rp;    //Rear panto
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_panto_flipcheck, vehicle_is_flipped){
+	0 : sw_2000_icsd_wallaby_panto_direction;		//Not flipped, give Panto
+	return spriteset_2000_icsd_wallaby_r;    //Flipped, no panto
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_frontcheck, position_in_vehid_chain){
+	0: sw_2000_icsd_wallaby_panto_direction; //We need a pantograph, guaranteed
+	return sw_2000_icsd_wallaby_panto_flipcheck; //More Checks
+}
+
+switch(FEAT_TRAINS, PARENT, sw_2000_icsd_wallaby_directioncheck, vehicle_is_reversed){
+	0: sw_2000_icsd_wallaby_frontcheck; //We are going forwards
+	return sw_2000_icsd_wallaby_frontcheck_r; //We are going backwards
+}
+
+switch(FEAT_TRAINS, PARENT, sw_2000_icsd_wallaby_revcheck, vehicle_is_reversed){
+	0 : sw_2000_icsd_wallaby_lencheck;
+	return sw_2000_icsd_wallaby_lencheck_r;
+}
+
+switch(FEAT_TRAINS, SELF, sw_2000_icsd_wallaby_attach, vehicle_type_id){
+	item_2000_icsd_wallaby	: return CB_RESULT_ATTACH_ALLOW  ;
+	item_pgt_mu_coach	: return CB_RESULT_ATTACH_ALLOW  ;
+	return string(STR_NO_COUPLE_MU_SAME) ;
+}
+
+/* Define the actual train */
+item(FEAT_TRAINS, item_2000_icsd_wallaby) {
+    /* Define properties first, make sure to set all of them */
+    property {
+        reliability_decay:            20;
+		refittable_cargo_classes:	  CC_PASSENGERS ;
+		cargo_allow_refit:			  [PASS, TOUR] ;
+        sprite_id:                    SPRITE_ID_NEW_TRAIN;
+		misc_flags: bitmask(TRAIN_FLAG_MU, TRAIN_FLAG_SPRITE_STACK, TRAIN_FLAG_2CC);
+        track_type:                   ELRL;
+        ai_special_flag:              AI_FLAG_PASSENGER;
+        running_cost_base:            RUNNING_COST_ELECTRIC;
+		length:						  8;
+		dual_headed:				  1;
+        refit_cost:                   0;
+        // callback flags are not set manually
+        ai_engine_rank:               0;
+        engine_class:                 ENGINE_CLASS_ELECTRIC;
+        extra_power_per_wagon:        0 kW;
+        air_drag_coefficient:         0.06;
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_ELECTRIC ;
+        extra_weight_per_wagon:       0 ton;
+        bitmask_vehicle_info:         0;
+        name:                         string(str_name_2000_icsd_wallaby);
+        climates_available:           ALL_CLIMATES; 
+        introduction_date:            date(2000, 1, 1);
+        model_life:                   40; //How long should this train be buyable
+        vehicle_life:                 40; //How long should this train last before renewal
+        tractive_effort_coefficient:  0.157;
+        weight:                       45 ton;
+        power:                        2000 hp;
+		cargo_capacity:				  70 ;
+        speed:                        160 km/h;
+		
+		cost_factor:                    1;
+		running_cost_factor:            1;
+        loading_speed:                	5; 
+    }
+    /* Define graphics and callbacks
+     * Setting all callbacks is not needed, only define what is used */
+    graphics {
+        default				:	sw_2000_icsd_wallaby_directioncheck;
+		can_attach_wagon	:	sw_2000_icsd_wallaby_attach ;
+		create_effect		:	vfx_ohle ;
+		additional_text		: 	string(STR_DESC_INTERCITY);
+    }
+	livery_override (item_pgt_mu_coach){
+		default                     : sw_2000_icsd_wallaby_revcheck ;
+		cargo_capacity              : 70 ;
+		weight                      : 45 ;
+		power                       : 2000 ;
+		length						: 8;
+	}
+}

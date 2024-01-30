@@ -1,0 +1,49 @@
+spriteset(spriteset_ef65_blue, "gfx/ELECTRIC_LOCO/ef65-blue.png") {
+	template_fai_6(0, 0)
+}
+
+//Sprite stack
+
+/* Define the actual train */
+item(FEAT_TRAINS, item_ef65_blue) {
+    /* Define properties first, make sure to set all of them */
+    property {
+        name:                         string(STR_NAME_EF_65);
+        // not available in toyland:
+        climates_available:           ALL_CLIMATES; 
+        introduction_date:            date(1965, 1, 1);
+        model_life:                   32;
+        vehicle_life:                 38;
+        reliability_decay:            20;
+        cost_factor:                  45;
+        running_cost_factor:          100;
+        sprite_id:                    SPRITE_ID_NEW_TRAIN;
+        speed:                        110 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_SPRITE_STACK);
+        refit_cost:                   0;
+        // callback flags are not set manually
+        track_type:                   ELRL;
+        ai_special_flag:              AI_FLAG_PASSENGER;
+        power:                        2550 hp;
+        running_cost_base:            RUNNING_COST_ELECTRIC;
+        weight:                       42 ton;
+        ai_engine_rank:               0;
+        engine_class:                 ENGINE_CLASS_ELECTRIC;
+        extra_power_per_wagon:        0 kW;
+        tractive_effort_coefficient:  0.5; // changed by callback
+        air_drag_coefficient:         0.06;
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_ELECTRIC ;
+        extra_weight_per_wagon:       0 ton;
+        bitmask_vehicle_info:         0;
+		dual_headed                    : 0 ;
+		length:							6;
+    }
+    /* Define graphics and callbacks
+     * Setting all callbacks is not needed, only define what is used */
+    graphics {
+        default				:	spriteset_ef65_blue;
+		sound_effect		:	sw_sfx_electric_fai ;
+		create_effect		:	vfx_ohle ;
+		colour_mapping		:	COLOUR_DARK_BLUE;
+    }
+}

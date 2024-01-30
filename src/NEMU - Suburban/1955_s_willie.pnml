@@ -1,0 +1,93 @@
+spriteset(spriteset_1955_s_willie_f,   "gfx/NEMU - Suburban/1955_s_willie.png") {template_32(7, 39)}
+spriteset(spriteset_1955_s_willie_r,   "gfx/NEMU - Suburban/1955_s_willie.png") {template_32_r(7, 64)}
+spriteset(spriteset_1955_s_willie_c,    "gfx/NEMU - Suburban/1955_s_willie.png") {template_32(7, 89)}
+spriteset(spriteset_1955_s_willie_s,    "gfx/NEMU - Suburban/1955_s_willie.png") {template_32(185, 39)}
+
+// C O D E
+
+
+switch(FEAT_TRAINS, SELF, sw_1955_s_willie_rearcheck, position_in_vehid_chain_from_end){
+	0 : spriteset_1955_s_willie_r;
+	return spriteset_1955_s_willie_c;
+}
+
+switch(FEAT_TRAINS, SELF, sw_1955_s_willie_frontcheck, position_in_vehid_chain){
+	0 : spriteset_1955_s_willie_f;
+	return sw_1955_s_willie_rearcheck;
+}
+
+switch(FEAT_TRAINS, SELF, sw_1955_s_willie_nextcheck2, position_in_consist_from_end){
+	0 : spriteset_1955_s_willie_s;
+	return spriteset_1955_s_willie_f;
+}
+
+switch(FEAT_TRAINS, SELF, sw_1955_s_willie_nextcheck, position_in_vehid_chain_from_end){
+	0 : sw_1955_s_willie_nextcheck2;
+	return spriteset_1955_s_willie_s;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_1955_s_willie_lencheck, num_vehs_in_consist){
+	1 : spriteset_1955_s_willie_s;
+	return sw_1955_s_willie_nextcheck;
+}
+
+switch(FEAT_TRAINS, SELF, sw_1955_s_willie_attach, vehicle_type_id){
+	item_1955_s_willie	: return CB_RESULT_ATTACH_ALLOW  ;
+	item_pgt_mu_coach	: return CB_RESULT_ATTACH_ALLOW  ;
+	return string(STR_NO_COUPLE_MU_SAME) ;
+}
+
+/* Define the actual train */
+item(FEAT_TRAINS, item_1955_s_willie) {
+    /* Define properties first, make sure to set all of them */
+    property {
+        reliability_decay:            20;
+		refittable_cargo_classes:	  CC_PASSENGERS ;
+		cargo_allow_refit:			  [PASS, TOUR] ;
+        sprite_id:                    SPRITE_ID_NEW_TRAIN;
+		misc_flags: bitmask(TRAIN_FLAG_MU, TRAIN_FLAG_SPRITE_STACK, TRAIN_FLAG_2CC);
+        track_type:                   RAIL;
+        ai_special_flag:              AI_FLAG_PASSENGER;
+        running_cost_base:            RUNNING_COST_DIESEL;
+		length:						  8;
+		
+        refit_cost:                   0;
+        // callback flags are not set manually
+        ai_engine_rank:               0;
+        engine_class:                 ENGINE_CLASS_DIESEL;
+        extra_power_per_wagon:        0 kW;
+        air_drag_coefficient:         0.06;
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_DIESEL ;
+        extra_weight_per_wagon:       0 ton;
+        bitmask_vehicle_info:         0;
+        name:                         string(str_name_1955_s_willie);
+        climates_available:           ALL_CLIMATES; 
+        introduction_date:            date(1955, 1, 1);
+        model_life:                   40; //How long should this train be buyable
+        vehicle_life:                 40; //How long should this train last before renewal
+        tractive_effort_coefficient:  0.076;
+        weight:                       30 ton;
+        power:                        300 hp;
+		cargo_capacity:				  100 ;
+        speed:                        100 km/h;
+		
+		cost_factor:                    1;
+		running_cost_factor:            1;
+        loading_speed:                	5; 
+    }
+    /* Define graphics and callbacks
+     * Setting all callbacks is not needed, only define what is used */
+    graphics {
+        default				:	sw_1955_s_willie_lencheck;
+		can_attach_wagon	:	sw_1955_s_willie_attach ;
+		create_effect		:	vfx_diesel_default ;
+		additional_text		: 	string(STR_DESC_SUBURBAN);
+    }
+	livery_override (item_pgt_mu_coach){
+		default                     : sw_1955_s_willie_rearcheck ;
+		cargo_capacity              : 100 ;
+		weight                      : 30 ;
+		power                       : 300 ;
+		length						: 8;
+	}
+}

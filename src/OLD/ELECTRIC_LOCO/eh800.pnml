@@ -1,0 +1,102 @@
+spriteset(spriteset_eh800_f, "gfx/ELECTRIC_LOCO/eh800.png") {
+	template_eh800(0, 0)
+}
+spriteset(spriteset_eh800_r, "gfx/ELECTRIC_LOCO/eh800.png") {
+	template_eh800r(0, 17)
+}
+spriteset(spriteset_eh800_purchase, "gfx/ELECTRIC_LOCO/eh800.png") {
+	template_purchase(0, 125)
+}
+
+//Sprite stack
+
+switch(FEAT_TRAINS, SELF, sw_eh800_articulated, extra_callback_info1) {
+    /* Add three articulated parts, for a total of four */
+    1: return item_eh800_rear;
+    return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+/* Define the actual train */
+item(FEAT_TRAINS, item_eh800_front) {
+    /* Define properties first, make sure to set all of them */
+    property {
+        name:                         string(STR_NAME_EH_800);
+        // not available in toyland:
+        climates_available:           ALL_CLIMATES; 
+        introduction_date:            date(2012, 1, 1);
+        model_life:                   VEHICLE_NEVER_EXPIRES;
+        vehicle_life:                 30;
+        reliability_decay:            20;
+        cost_factor:                  45;
+        running_cost_factor:          100;
+        sprite_id:                    SPRITE_ID_NEW_TRAIN;
+        speed:                        140 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_SPRITE_STACK);
+        refit_cost:                   0;
+        // callback flags are not set manually
+        track_type:                   ELRL;
+        ai_special_flag:              AI_FLAG_PASSENGER;
+        power:                        2980 kW;
+        running_cost_base:            RUNNING_COST_ELECTRIC;
+        weight:                       42 ton;
+        ai_engine_rank:               0;
+        engine_class:                 ENGINE_CLASS_ELECTRIC;
+        extra_power_per_wagon:        0 kW;
+        tractive_effort_coefficient:  0.5; // changed by callback
+        air_drag_coefficient:         0.06;
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_ELECTRIC ;
+        extra_weight_per_wagon:       0 ton;
+        bitmask_vehicle_info:         0;
+		dual_headed                    : 0 ;
+		length:							3;
+    }
+    /* Define graphics and callbacks
+     * Setting all callbacks is not needed, only define what is used */
+    graphics {
+        default				:	spriteset_eh800_f;
+		sound_effect		:	sw_sfx_electric_fai ;
+		purchase			:	spriteset_eh800_purchase;
+		create_effect           : vfx_ohle ;
+        articulated_part:             sw_eh800_articulated;
+    }
+}
+item(FEAT_TRAINS, item_eh800_rear) {
+    /* Define properties first, make sure to set all of them */
+    property {
+        name:                         string(STR_NAME_EH_800);
+        // not available in toyland:
+        climates_available:           NO_CLIMATE; 
+        introduction_date:            date(2012, 1, 1);
+        model_life:                   VEHICLE_NEVER_EXPIRES;
+        vehicle_life:                 30;
+        reliability_decay:            20;
+        cost_factor:                  45;
+        running_cost_factor:          100;
+        sprite_id:                    SPRITE_ID_NEW_TRAIN;
+        speed:                        140 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_SPRITE_STACK);
+        refit_cost:                   0;
+        // callback flags are not set manually
+        track_type:                   ELRL;
+        ai_special_flag:              AI_FLAG_PASSENGER;
+        power:                        2980 kW;
+        running_cost_base:            RUNNING_COST_ELECTRIC;
+        weight:                       42 ton;
+        ai_engine_rank:               0;
+        engine_class:                 ENGINE_CLASS_ELECTRIC;
+        extra_power_per_wagon:        0 kW;
+        tractive_effort_coefficient:  0.5; // changed by callback
+        air_drag_coefficient:         0.06;
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_ELECTRIC ;
+        extra_weight_per_wagon:       0 ton;
+        bitmask_vehicle_info:         0;
+		dual_headed                    : 0 ;
+		length:							4;
+    }
+    /* Define graphics and callbacks
+     * Setting all callbacks is not needed, only define what is used */
+    graphics {
+        default				:	spriteset_eh800_r;
+		create_effect           : vfx_ohle ;
+    }
+}

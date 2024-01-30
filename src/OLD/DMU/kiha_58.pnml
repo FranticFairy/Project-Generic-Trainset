@@ -1,0 +1,244 @@
+// K I H A   5 8
+
+spriteset(spriteset_kiha_58_purchase, "gfx/TemplateBuy.png") { template_purchase(0, 0)}
+alternative_sprites(spriteset_kiha_58_purchase, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DMU/kiha_58.png"){ template_purchase(0,125)}
+
+spriteset(spriteset_kiha_58_single_purchase, "gfx/TemplateBuy.png") { template_purchase(0, 0)}
+alternative_sprites(spriteset_kiha_58_single_purchase, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DMU/kiha_58.png"){ template_purchase(0,138)}
+
+spriteset(spriteset_kiha_58_long_purchase, "gfx/TemplateBuy.png") { template_purchase(0, 0)}
+alternative_sprites(spriteset_kiha_58_long_purchase, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DMU/kiha_58.png"){ template_purchase(90,125)}
+
+spriteset(spriteset_kiha_58_cab_front, "gfx/Template8.png") { template_fairy_templated_32(0, 0)}
+alternative_sprites(spriteset_kiha_58_cab_front, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DMU/kiha_58.png"){ template_fairy_templated_32(0,0)}
+
+spriteset(spriteset_kiha_58_cab_rear, "gfx/Template8.png") { template_fairy_templated_32(0, 0)}
+alternative_sprites(spriteset_kiha_58_cab_rear, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DMU/kiha_58.png"){ template_fairy_templated_32(0,25)}
+
+spriteset(spriteset_kiha_58_single, "gfx/Template8.png") { template_fairy_templated_32(0, 0)}
+alternative_sprites(spriteset_kiha_58_single, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DMU/kiha_58.png"){ template_fairy_templated_32(0,50)}
+
+spriteset(spriteset_kiha_58_greencar, "gfx/Template8.png") { template_fairy_templated_32(0, 0)}
+alternative_sprites(spriteset_kiha_58_greencar, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DMU/kiha_58.png"){ template_fairy_templated_32(0,75)}
+
+spriteset(spriteset_kiha_58_greencar_rev, "gfx/Template8.png") { template_reversed_fairy_templated_32(0, 0)}
+alternative_sprites(spriteset_kiha_58_greencar_rev, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DMU/kiha_58.png"){ template_reversed_fairy_templated_32(0,75)}
+
+spriteset(spriteset_kiha_58_regularcar, "gfx/Template8.png") { template_fairy_templated_32(0, 0)}
+alternative_sprites(spriteset_kiha_58_regularcar, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DMU/kiha_58.png"){ template_fairy_templated_32(0,100)}
+
+spriteset(spriteset_kiha_58_regularcar_rev, "gfx/Template8.png") { template_reversed_fairy_templated_32(0, 0)}
+alternative_sprites(spriteset_kiha_58_regularcar_rev, ZOOM_LEVEL_NORMAL, BIT_DEPTH_32BPP, "gfx/DMU/kiha_58.png"){ template_reversed_fairy_templated_32(0,100)}
+
+//C O D E
+
+switch(FEAT_TRAINS, SELF, sw_kiha_58_spritecheck, position_in_articulated_veh){
+	0 : spriteset_kiha_58_cab_front;
+	return spriteset_kiha_58_cab_rear;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha_58_l_fullcheck, position_in_articulated_veh){
+	0 : spriteset_kiha_58_cab_front;
+	1 : spriteset_kiha_58_greencar;
+	return spriteset_kiha_58_regularcar;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha_58_l_fullcheck_rev, position_in_articulated_veh){
+	0 : spriteset_kiha_58_cab_front;
+	2 : spriteset_kiha_58_greencar_rev;
+	return spriteset_kiha_58_regularcar_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha_58_l_reversed, position_in_articulated_veh_from_end){
+	0 : spriteset_kiha_58_cab_rear;
+	return sw_kiha_58_l_fullcheck_rev;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha_58_l_unreversed, position_in_articulated_veh_from_end){
+	0 : spriteset_kiha_58_cab_rear;
+	return sw_kiha_58_l_fullcheck;
+}
+
+switch(FEAT_TRAINS, PARENT, sw_kiha_58_l_revcheck, vehicle_is_reversed){
+	0 : sw_kiha_58_l_unreversed;
+	return sw_kiha_58_l_reversed;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha_58_attach, vehicle_type_id){
+	item_kiha_58_l	: return CB_RESULT_ATTACH_ALLOW  ;
+	item_kiha_58	: return CB_RESULT_ATTACH_ALLOW  ;
+	item_kiha_58_s	: return CB_RESULT_ATTACH_ALLOW  ;
+	return string(STR_NO_COUPLE_SAME) ;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha_58_articulated_part, extra_callback_info1) {
+    /* Add three articulated parts, for a total of four */
+	1: return item_kiha_58;
+    return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha_58_long_articulated_part, extra_callback_info1) {
+    /* Add three articulated parts, for a total of four */
+    1 .. 2: return item_WAGON_MU;
+	3: return item_kiha_58_l;
+    return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, sw_kiha_58_start_stop, num_vehs_in_consist) {
+    return CB_RESULT_NO_TEXT;
+}
+
+/* Define the actual train */
+item(FEAT_TRAINS, item_kiha_58_s) {
+    /* Define properties first, make sure to set all of them */
+    property {
+        name:                         string(STR_NAME_KIHA_58_S);
+        // not available in toyland:
+        climates_available:           ALL_CLIMATES; 
+        introduction_date:            date(1969, 1, 1);
+        model_life:                   41;
+        vehicle_life:                 30;
+        reliability_decay:            20;
+		refittable_cargo_classes:		CC_PASSENGERS ;
+		cargo_allow_refit:				[PASS, TOUR] ;
+		cargo_capacity:					30 ;
+        loading_speed:                6; 
+        cost_factor:                  6;
+        running_cost_factor:          66;
+        sprite_id:                    SPRITE_ID_NEW_TRAIN;
+        speed:                        95 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_MU, TRAIN_FLAG_SPRITE_STACK);
+        refit_cost:                   0;
+        // callback flags are not set manually
+        track_type:                   RAIL;
+        ai_special_flag:              AI_FLAG_PASSENGER;
+        power:                        240 kW;
+        running_cost_base:            RUNNING_COST_ELECTRIC;
+        weight:                       35 ton;
+        ai_engine_rank:               0;
+        engine_class:                 ENGINE_CLASS_ELECTRIC;
+        extra_power_per_wagon:        0 kW;
+        tractive_effort_coefficient:  0.3; // changed by callback
+        air_drag_coefficient:         0.06;
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_ELECTRIC ;
+        extra_weight_per_wagon:       0 ton;
+        bitmask_vehicle_info:         0;
+		dual_headed                    : 0 ;
+    }
+    /* Define graphics and callbacks
+     * Setting all callbacks is not needed, only define what is used */
+    graphics {
+        default				:	spriteset_kiha_58_single;
+		can_attach_wagon	:	sw_kiha_58_attach ;
+		sound_effect		:	sw_sfx_diesel_fai_old ;
+		purchase			:	spriteset_kiha_58_single_purchase;
+		create_effect		:	vfx_diesel_default ;
+        start_stop			:	sw_kiha_58_start_stop;
+    }
+}
+
+/* Define the actual train */
+item(FEAT_TRAINS, item_kiha_58) {
+    /* Define properties first, make sure to set all of them */
+    property {
+        name:                         string(STR_NAME_KIHA_58);
+        // not available in toyland:
+        climates_available:           ALL_CLIMATES; 
+        introduction_date:            date(1969, 1, 1);
+        model_life:                   41;
+        vehicle_life:                 30;
+        reliability_decay:            20;
+		refittable_cargo_classes:		CC_PASSENGERS ;
+		cargo_allow_refit:				[PASS, TOUR] ;
+		cargo_capacity:					30 ;
+        loading_speed:                6; 
+        cost_factor:                  8;
+        running_cost_factor:          68;
+        sprite_id:                    SPRITE_ID_NEW_TRAIN;
+        speed:                        95 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_MU, TRAIN_FLAG_SPRITE_STACK);
+        refit_cost:                   0;
+        // callback flags are not set manually
+        track_type:                   RAIL;
+        ai_special_flag:              AI_FLAG_PASSENGER;
+        power:                        240 kW;
+        running_cost_base:            RUNNING_COST_ELECTRIC;
+        weight:                       35 ton;
+        ai_engine_rank:               0;
+        engine_class:                 ENGINE_CLASS_ELECTRIC;
+        extra_power_per_wagon:        0 kW;
+        tractive_effort_coefficient:  0.3; // changed by callback
+        air_drag_coefficient:         0.06;
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_ELECTRIC ;
+        extra_weight_per_wagon:       0 ton;
+        bitmask_vehicle_info:         0;
+		dual_headed                    : 0 ;
+    }
+    /* Define graphics and callbacks
+     * Setting all callbacks is not needed, only define what is used */
+    graphics {
+        default				:	sw_kiha_58_spritecheck;
+        articulated_part	:	sw_kiha_58_articulated_part;
+		can_attach_wagon	:	sw_kiha_58_attach ;
+		sound_effect		:	sw_sfx_diesel_fai_old ;
+		purchase			:	spriteset_kiha_58_purchase;
+		create_effect		:	vfx_diesel_default ;
+        start_stop			:	sw_kiha_58_start_stop;
+    }
+}
+
+/* Define the actual train */
+item(FEAT_TRAINS, item_kiha_58_l) {
+    /* Define properties first, make sure to set all of them */
+    property {
+        name:                         string(STR_NAME_KIHA_58_L);
+        // not available in toyland:
+        climates_available:           ALL_CLIMATES; 
+        introduction_date:            date(1969, 1, 1);
+        model_life:                   41;
+        vehicle_life:                 30;
+        reliability_decay:            20;
+		refittable_cargo_classes:		CC_PASSENGERS ;
+		cargo_allow_refit:				[PASS, TOUR] ;
+		cargo_capacity:					30 ;
+        loading_speed:                6; 
+        cost_factor:                  10;
+        running_cost_factor:          70;
+        sprite_id:                    SPRITE_ID_NEW_TRAIN;
+        speed:                        95 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_MU, TRAIN_FLAG_SPRITE_STACK);
+        refit_cost:                   0;
+        // callback flags are not set manually
+        track_type:                   RAIL;
+        ai_special_flag:              AI_FLAG_PASSENGER;
+        power:                        240 kW;
+        running_cost_base:            RUNNING_COST_ELECTRIC;
+        weight:                       35 ton;
+        ai_engine_rank:               0;
+        engine_class:                 ENGINE_CLASS_ELECTRIC;
+        extra_power_per_wagon:        0 kW;
+        tractive_effort_coefficient:  0.3; // changed by callback
+        air_drag_coefficient:         0.06;
+		effect_spawn_model_and_powered : EFFECT_SPAWN_MODEL_ELECTRIC ;
+        extra_weight_per_wagon:       0 ton;
+        bitmask_vehicle_info:         0;
+		dual_headed                    : 0 ;
+    }
+    /* Define graphics and callbacks
+     * Setting all callbacks is not needed, only define what is used */
+    graphics {
+        default				:	sw_kiha_58_l_revcheck;
+        articulated_part	:	sw_kiha_58_long_articulated_part;
+		can_attach_wagon	:	sw_kiha_58_attach ;
+		sound_effect		:	sw_sfx_diesel_fai_old ;
+		purchase			:	spriteset_kiha_58_purchase;
+		create_effect		:	vfx_diesel_default ;
+        start_stop			:	sw_kiha_58_start_stop;
+    }
+	livery_override (item_WAGON_MU){
+		default                     : sw_kiha_58_l_revcheck ;
+		cargo_capacity              : 30 ;
+		weight                      : 35 ;
+		power                       : 150 ;
+	}
+}

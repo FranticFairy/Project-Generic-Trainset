@@ -1,0 +1,47 @@
+spriteset(spriteset_1970_ssd_coach,   "gfx/Passenger Stock/Suburban Coaches/1970_ssd_coach.png") {template_32(7, 39)}
+spriteset(spriteset_1970_ssd_coach_g,   "gfx/Passenger Stock/Suburban Coaches/1970_ssd_coach.png") {template_32(7, 82)}
+
+switch(FEAT_TRAINS, SELF, sw_1970_ssd_coach_guardcheck, position_in_consist_from_end){
+	0 : spriteset_1970_ssd_coach_g;
+	return spriteset_1970_ssd_coach;
+}
+
+item (FEAT_TRAINS, item_1970_ssd_coach) {
+	property {
+		climates_available: 			ALL_CLIMATES;
+		retire_early:					1;
+		vehicle_life:					40;
+		reliability_decay:				7;
+		refittable_cargo_classes:		CC_PASSENGERS;
+		cargo_allow_refit:				[PASS, TOUR];
+		sprite_id:						SPRITE_ID_NEW_TRAIN;
+		misc_flags:						bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_SPRITE_STACK, TRAIN_FLAG_TILT);
+		refit_cost:						0;
+		track_type:						RAIL;
+		ai_special_flag:				AI_FLAG_CARGO;
+		power:							0 hp;
+		running_cost_base:				RUNNING_COST_NONE;
+		dual_headed:					0;
+		default_cargo_type:				PASS;
+		air_drag_coefficient:			0.08;
+		bitmask_vehicle_info:			0;
+		
+		model_life:						40;
+		
+		length:							8;
+		cost_factor:                    1;
+		running_cost_factor:            1;
+        loading_speed:                	5; 
+		
+		name: 							string(str_name_1970_ssd_coach);
+		introduction_date:				date(1970, 1, 1);
+		
+        speed:                        	100 km/h;
+		weight:							30 ton;
+		cargo_capacity:					115;
+	}
+	graphics {
+	default: 							sw_1970_ssd_coach_guardcheck;
+	purchase:							spriteset_1970_ssd_coach;
+}
+}
